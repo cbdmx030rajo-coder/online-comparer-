@@ -1,0 +1,284 @@
+.search-product-card {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background: white;
+    border: 1px solid #dce5ef;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 5px 18px rgba(20, 50, 90, 0.06);
+}
+
+.search-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(20, 50, 90, 0.10);
+}
+/* =========================================
+   SEARCH RESULTS - PRODUCT CARDS
+   ========================================= */
+
+.search-results-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+.search-product-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: #ffffff;
+    border: 1px solid #dce5ef;
+    border-radius: 16px;
+    padding: 22px;
+    margin: 20px 0;
+    box-shadow: 0 5px 18px rgba(20, 50, 90, 0.06);
+    transition: 0.2s ease;
+}
+
+.search-product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(20, 50, 90, 0.12);
+}
+
+/* Product image */
+
+.search-product-image {
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #f5f8fc;
+    padding: 15px;
+}
+
+/* Product information */
+
+.search-product-info {
+    flex: 1;
+}
+
+.search-product-category {
+    color: #1468e8;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.search-product-name {
+    font-size: 25px;
+    font-weight: 700;
+    color: #101828;
+    margin: 0 0 10px;
+}
+
+.search-product-rating {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.search-product-price {
+    font-size: 20px;
+    color: #101828;
+    margin: 10px 0;
+}
+
+.search-product-price strong {
+    font-size: 24px;
+}
+
+/* Compare button */
+
+.compare-price-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #1468e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.compare-price-btn:hover {
+    background: #0d56c7;
+    transform: translateY(-1px);
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .search-product-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-product-image {
+        width: 100%;
+        height: 220px;
+    }
+
+}
+/* =========================================
+   SEARCH PRODUCT CARD - FINAL FIX
+========================================= */
+
+.search-product-card {
+    width: 100%;
+    display: flex !important;
+    align-items: center !important;
+    gap: 30px;
+
+    background: #ffffff;
+    border: 1px solid #dce5ef;
+    border-radius: 16px;
+
+    padding: 22px;
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 6px 20px rgba(16, 24, 40, 0.07);
+}
+
+
+.search-product-image {
+    width: 170px;
+    height: 170px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f8fc;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+
+.search-product-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 10px;
+}
+
+
+.image-fallback {
+    font-size: 70px;
+}
+
+
+.search-product-info {
+    flex: 1;
+}
+
+
+.product-category {
+    display: block;
+
+    color: #1468e8;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+
+.search-product-info h3 {
+    margin: 0 0 12px;
+
+    color: #101828;
+
+    font-size: 25px;
+}
+
+
+.product-rating {
+    color: #64748b;
+
+    font-size: 16px;
+}
+
+
+.search-product-price {
+    width: 230px;
+
+    flex-shrink: 0;
+
+    text-align: right;
+}
+
+
+.search-product-price small {
+    display: block;
+
+    color: #64748b;
+
+    margin-bottom: 5px;
+}
+
+
+.search-product-price strong {
+    display: block;
+
+    color: #101828;
+
+    font-size: 26px;
+
+    margin-bottom: 16px;
+}
+
+
+.compare-price-btn {
+    border: none;
+
+    background: #1468e8;
+
+    color: #ffffff;
+
+    padding: 12px 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.compare-price-btn:hover {
+    background: #0c58c9;
+}
+
+
+@media (max-width: 700px) {
+
+    .search-product-card {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    .search-product-image {
+        width: 100%;
+        height: 220px;
+    }
+
+    .search-product-price {
+        width: 100%;
+        text-align: left;
+    }
+
+}

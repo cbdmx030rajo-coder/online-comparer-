@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Compare Prices - PriceComparer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <span class="logo-box">P</span>
+
+            <span class="logo-price">Price</span>
+            <span>Comparer</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
+            <a href="index.html#products">
+                Deals
+            </a>
+
+            <a href="index.html#how-it-works">
+                How It Works
+            </a>
+
+        </nav>
+
+
+        <button class="login-btn">
+            ♙ Login
+        </button>
+
+    </header>
+
+
+
+    <!-- SEARCH AREA -->
+
+    <section class="comparison-search">
+
+        <div class="comparison-search-inner">
+
+            <a href="index.html" class="back-link">
+                ← Back to Home
+            </a>
+
+
+            <h1>
+                Compare Prices
+            </h1>
+
+
+            <div class="comparison-search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="comparisonSearch"
+                    placeholder="Search for a product..."
+                >
+
+                <button id="comparisonSearchButton">
+                    Search
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="comparison-container">
+
+
+        <!-- PRODUCT HEADER -->
+
+        <section class="comparison-product">
+
+
+            <div class="comparison-product-image">
+
+                <img
+                    id="comparisonProductImage"
+                    src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=85"
+                    alt="Product"
+                >
+
+            </div>
+
+
+            <div class="comparison-product-info">
+
+                <span class="comparison-category">
+                    Smartphone
+                </span>
+
+
+                <h2 id="comparisonProductName">
+                    iPhone 16
+                </h2>
+
+
+                <p>
+                    Compare prices from multiple
+                    online stores and find the
+                    best deal.
+                </p>
+
+
+                <div class="rating">
+
+                    ⭐ 4.6
+
+                    <span>
+                        Excellent product rating
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="best-price-summary">
+
+                <span>
+                    BEST PRICE
+                </span>
+
+                <strong id="bestPrice">
+                    ₹68,499
+                </strong>
+
+                <small>
+                    Save up to ₹2,491
+                </small>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- STORE COMPARISON -->
+
+        <section class="stores-section">
+
+
+            <div class="stores-header">
+
+                <div>
+
+                    <p class="small-heading">
+                        PRICE COMPARISON
+                    </p>
+
+                    <h2>
+                        Compare Stores
+                    </h2>
+
+                </div>
+
+
+                <span class="store-count">
+                    4 stores found
+                </span>
+
+            </div>
+<div id="storeCards"></div>
+</section>
+
+
+         
+
+               
+
+               
+
+
+
+        <!-- PRICE DIFFERENCE -->
+
+        <section class="saving-section">
+
+            <div class="saving-icon">
+                💰
+            </div>
+
+            <div>
+
+                <h3>
+                    You can save ₹2,491
+                </h3>
+
+                <p>
+                    The difference between the
+                    highest and lowest listed price.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- DISCLAIMER -->
+
+        <p class="price-disclaimer">
+
+            Prices shown are demo data for
+            development purposes. Actual retailer
+            prices may change.
+
+        </p>
+
+    </main>
+
+
+
+    <footer class="footer">
+
+        <div class="footer-bottom">
+
+            © 2026 PriceComparer.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    
+   
+<script src="products.js?v=3"></script>
+<script src="script.js?v=3"></script>
+</body>
+
+</html>

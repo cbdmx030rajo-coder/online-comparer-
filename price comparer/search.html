@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="search.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Search Products - PriceComparer</title>
+
+   
+
+</head>
+
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="main-header">
+
+        <div class="logo">
+            <span class="logo-box">P</span>
+            <span>Price<span>Comparer</span></span>
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="#">
+                Categories
+            </a>
+
+            <a href="#">
+                Deals
+            </a>
+
+            <a href="#">
+                How It Works
+            </a>
+
+        </nav>
+
+
+        <button class="login-btn">
+            👤 Login
+        </button>
+
+    </header>
+
+
+    <!-- ================= SEARCH AREA ================= -->
+
+    <section class="search-section">
+
+        <div class="search-container">
+
+            <h1>
+                Find the Best Price
+            </h1>
+
+            <p>
+                Search thousands of products and compare prices
+                from multiple online stores.
+            </p>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="productSearch"
+                    placeholder="Search for a product..."
+                    autocomplete="off"
+                >
+
+                <button
+                    onclick="searchProduct()"
+                >
+                    🔍 Search
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RESULTS ================= -->
+
+    <main class="search-results-container">
+
+        <div class="results-header">
+
+            <div>
+
+                <p class="small-heading">
+                    SEARCH RESULTS
+                </p>
+
+                <h2 id="resultsTitle">
+                    Search for a product
+                </h2>
+
+            </div>
+
+            <span id="resultCount"></span>
+
+        </div>
+
+
+        <div id="results">
+
+            <div class="empty-results">
+
+                <div class="empty-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    What are you looking for?
+                </h3>
+
+                <p>
+                    Search for a phone, laptop, headphones,
+                    TV or any other product.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+<script src="products.js"></script>
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+        
+
+
+
+
+// ==========================================
+// SEARCH
+// ==========================================
+
+function searchProduct() {
+
+    const input =
+        document.getElementById("productSearch");
+
+    const results =
+        document.getElementById("results");
+
+    const resultsTitle =
+        document.getElementById("resultsTitle");
+
+    const resultCount =
+        document.getElementById("resultCount");
+
+
+    const query =
+        input.value.trim().toLowerCase();
+
+
+    // Empty search
+    if (query === "") {
+
+        resultsTitle.textContent =
+            "Search for a product";
+
+        resultCount.textContent = "";
+
+        results.innerHTML = `
+
+            <div class="empty-results">
+
+                <div class="empty-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    What are you looking for?
+                </h3>
+
+                <p>
+                    Enter a product name above.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // Find matching products
+    const matchingProducts =
+         productCatalog.filter(
+            function(product) {
+
+                return (
+                    product.name
+                        .toLowerCase()
+                        .includes(query)
+
+                    ||
+
+                    product.category
+                        .toLowerCase()
+                        .includes(query)
+                );
+
+            }
+        );
+
+
+    // No results
+    if (matchingProducts.length === 0) {
+
+        resultsTitle.textContent =
+            `No results for "${input.value}"`;
+
+        resultCount.textContent =
+            "0 products found";
+
+        results.innerHTML = `
+
+            <div class="empty-results">
+
+                <div class="empty-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    No products found
+                </h3>
+
+                <p>
+                    Try iPhone, Samsung,
+                    MacBook, Sony or OnePlus.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // Heading
+    resultsTitle.textContent =
+        `Results for "${input.value}"`;
+
+    resultCount.textContent =
+        matchingProducts.length +
+        " product" +
+        (matchingProducts.length > 1 ? "s" : "") +
+        " found";
+
+
+    // Clear results
+    results.innerHTML = "";
+
+
+    // Build cards
+    matchingProducts.forEach(
+        function(product) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "search-product-card";
+
+
+            card.innerHTML = `
+
+                <div class="search-product-image image-fallback">
+                    ${product.icon}
+                </div>
+
+
+                <div class="search-product-info">
+
+                    <span class="product-category">
+                        ${product.category}
+                    </span>
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+                    <div class="product-rating">
+                        ⭐ ${product.rating}
+                    </div>
+
+                </div>
+
+
+                <div class="search-product-price">
+
+                    <small>
+                        Starting from
+                    </small>
+
+                    <strong>
+                        ₹${getLowestProductPrice(product).toLocaleString("en-IN")}
+                    </strong>
+
+                    <button
+                        class="compare-price-btn"
+                        onclick="compareProduct('${product.name}')"
+                    >
+                        Compare Prices →
+                    </button>
+
+                </div>
+
+            `;
+
+
+            results.appendChild(card);
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// OPEN COMPARISON PAGE
+// ==========================================
+
+function compareProduct(productName) {
+
+    window.location.href =
+        "comparison.html?product=" +
+        encodeURIComponent(productName);
+
+}
+
+
+// ==========================================
+// ENTER KEY SEARCH
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const input =
+            document.getElementById(
+                "productSearch"
+            );
+
+
+        input.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    searchProduct();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+    </script>
+
+
+    <script>
+
+        // ============================================
+        // SEARCH PRODUCT
+        // ============================================
+
+        function searchProduct() {
+
+            const input =
+                document.getElementById(
+                    "productSearch"
+                );
+
+
+            const query =
+                input.value.trim();
+
+
+            const results =
+                document.getElementById(
+                    "results"
+                );
+
+
+            const resultsTitle =
+                document.getElementById(
+                    "resultsTitle"
+                );
+
+
+            const resultCount =
+                document.getElementById(
+                    "resultCount"
+                );
+
+
+            if (!query) {
+
+                results.innerHTML = `
+
+                    <div class="empty-results">
+
+                        <div class="empty-icon">
+                            ⚠️
+                        </div>
+
+                        <h3>
+                            Please enter a product name
+                        </h3>
+
+                        <p>
+                            Try searching for iPhone,
+                            Samsung, MacBook or OnePlus.
+                        </p>
+
+                    </div>
+
+                `;
+
+                resultsTitle.textContent =
+                    "Search for a product";
+
+                resultCount.textContent = "";
+
+                return;
+
+            }
+
+
+            // ========================================
+            // PRODUCT DATABASE
+            // ========================================
+
+            const products = [
+
+                {
+                    name: "iPhone 16",
+                    category: "Smartphone",
+                    price: 68499,
+                    rating: "4.6",
+                    image:
+                        "https://images.unsplash.com/photo-1592286927505-2fd2c2f1f2e4?auto=format&fit=crop&w=500&q=80"
+                },
+
+
+                {
+                    name: "iPhone 16 Pro",
+                    category: "Smartphone",
+                    price: 99999,
+                    rating: "4.7",
+                    image:
+                        "https://images.unsplash.com/photo-1592286927505-2fd2c2f1f2e4?auto=format&fit=crop&w=500&q=80"
+                },
+
+
+                {
+                    name: "Samsung Galaxy S25",
+                    category: "Smartphone",
+                    price: 74999,
+                    rating: "4.5",
+                    image:
+                        "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=500&q=80"
+                },
+
+
+                {
+                    name: "MacBook Air",
+                    category: "Laptop",
+                    price: 89999,
+                    rating: "4.7",
+                    image:
+                        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=500&q=80"
+                },
+
+
+                {
+                    name: "Sony WH-1000XM5",
+                    category: "Headphones",
+                    price: 24999,
+                    rating: "4.6",
+                    image:
+                        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=500&q=80"
+                },
+
+
+                {
+                    name: "OnePlus 13",
+                    category: "Smartphone",
+                    price: 59999,
+                    rating: "4.5",
+                    image:
+                        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=500&q=80"
+                }
+
+            ];
+
+
+            // ========================================
+            // FILTER PRODUCTS
+            // ========================================
+
+            const searchText =
+                query.toLowerCase();
+
+
+            const matchingProducts =
+                products.filter(function(product) {
+
+                    return (
+                        product.name
+                            .toLowerCase()
+                            .includes(searchText)
+
+                        ||
+
+                        product.category
+                            .toLowerCase()
+                            .includes(searchText)
+                    );
+
+                });
+
+
+            // ========================================
+            // SHOW NO RESULTS
+            // ========================================
+
+            if (
+                matchingProducts.length === 0
+            ) {
+
+                resultsTitle.textContent =
+                    "No products found";
+
+                resultCount.textContent =
+                    "0 products";
+
+
+                results.innerHTML = `
+
+                    <div class="empty-results">
+
+                        <div class="empty-icon">
+                            🔎
+                        </div>
+
+                        <h3>
+                            No matching products
+                        </h3>
+
+                        <p>
+                            Try searching for iPhone,
+                            Samsung, MacBook, Sony or OnePlus.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            // ========================================
+            // SHOW RESULTS
+            // ========================================
+
+            resultsTitle.textContent =
+                "Results for \"" +
+                query +
+                "\"";
+
+
+            resultCount.textContent =
+                matchingProducts.length +
+                " products found";
+
+
+            results.innerHTML = "";
+
+
+          matchingProducts.forEach(function(product) {
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "search-product-card";
+
+
+    card.innerHTML = `
+
+        <!-- PRODUCT IMAGE -->
+
+        <div class="search-product-image">
+
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+                onerror="
+                    this.style.display='none';
+                    this.parentElement.innerHTML='📱';
+                    this.parentElement.classList.add('image-fallback');
+                "
+            >
+
+        </div>
+
+
+        <!-- PRODUCT INFORMATION -->
+
+        <div class="search-product-info">
+
+            <span class="product-category">
+                ${product.category}
+            </span>
+
+            <h3>
+                ${product.name}
+            </h3>
+
+            <div class="product-rating">
+                ⭐ ${product.rating}
+            </div>
+
+        </div>
+
+
+        <!-- PRICE -->
+
+        <div class="search-product-price">
+
+            <small>
+                Starting from
+            </small>
+
+            <strong>
+                 ₹${getLowestProductPrice(product).toLocaleString("en-IN")}
+            </strong>
+
+            <button
+                class="compare-price-btn"
+                onclick="compareProduct('${product.name}')"
+            >
+                Compare Prices →
+            </button>
+
+        </div>
+
+    `;
+
+
+    results.appendChild(card);
+
+});
+
+        // ============================================
+        // OPEN COMPARISON PAGE
+        // ============================================
+
+        function compareProduct(
+            productName
+        ) {
+
+            window.location.href =
+                "comparison.html?product=" +
+                encodeURIComponent(
+                    productName
+                );
+
+        }
+
+
+        // ============================================
+        // SEARCH USING ENTER KEY
+        // ============================================
+
+        document
+            .getElementById("productSearch")
+            .addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        searchProduct();
+
+                    }
+
+                }
+            );
+
+    </script>
+   
+</body>
+
+</html>
